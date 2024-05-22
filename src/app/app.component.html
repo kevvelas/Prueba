@@ -1,0 +1,56 @@
+<h1 class="text-center text-primary">Listado de reservas centenario</h1>
+<hr>
+
+<div class="row">
+  <div class="col">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar por nombre"
+      [(ngModel)]="filterText" (input)="filterData()"
+    >
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary file-upload-button p-1">
+      <img
+        src="assets/file-upload.svg"
+        height="20"
+        width="20"
+        class="mb-1"
+      >
+      <input class="btn btn-secondary mb-2" type="file" (change)="onFileSelected($event)"/>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <hr>
+    <div *ngIf="filteredData.length === 0; else table" class="alert alert-warning text-center">
+      No hay participantes que mostrar
+    </div>
+      <ng-template #table>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Tipo Documento</th>
+              <th>Número Documento</th>
+              <th>Nombre SAP</th>
+              <th>Nombre Invitación</th>
+              <th>Tipo</th>
+              <th>Mesa</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let dat of filteredData | slice:0:50">
+              <td>{{dat.tipoDoc}}</td>
+              <td>{{dat.numeroDoc}}</td>
+              <td>{{dat.nombreSap}}</td>
+              <td>{{dat.nombreInvitacion}}</td>
+              <td>{{dat.tipo}}</td>
+              <td>{{dat.mesa}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+  </div>
+</div>
